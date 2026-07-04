@@ -1,9 +1,11 @@
+package tests;
+
+import drivers.WebDriverFactory;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.edge.EdgeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import pages.LoginPage;
 
 public class HomeTest {
     //variables
@@ -21,15 +23,27 @@ public class HomeTest {
     //configurations
     @BeforeMethod
     public void setUp() {
+        //Normal method to create driver
+        /*
         EdgeOptions edgeoptions = new EdgeOptions();
         edgeoptions.addArguments("--start-maximized");
         driver = new EdgeDriver(edgeoptions);
+        driver.get("https://www.saucedemo.com/");
+
+         */
+        //Factory method to create driver
+        driver = WebDriverFactory.initDriver("chrome");
         driver.get("https://www.saucedemo.com/");
 
     }
 
     @AfterMethod
     public void tearDown() {
+        //Normal method to quit driver
+        /*
         driver.quit();
+
+         */
+        WebDriverFactory.quitDriver();
     }
 }
