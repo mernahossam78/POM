@@ -6,15 +6,17 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.LoginPage;
+import utils.JsonReader;
 
 public class HomeTest {
     //variables
     WebDriver driver;
+    JsonReader jsonReader;
 
     @Test
     public void addToCartTC() {
         new LoginPage(driver)
-                .login("standard_user", "secret_sauce")
+                .login(jsonReader.getJsonData("username"), jsonReader.getJsonData("password"))
                 .isLoggedIn("https://www.saucedemo.com/inventory.html")
                 .addToCart()
                 .validateCartIcon();
@@ -23,6 +25,7 @@ public class HomeTest {
     //configurations
     @BeforeMethod
     public void setUp() {
+        jsonReader = new JsonReader("login-data");
         //Normal method to create driver
         /*
         EdgeOptions edgeoptions = new EdgeOptions();
