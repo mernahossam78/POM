@@ -1,6 +1,7 @@
 package CustomListeners;
 
 import org.testng.*;
+import utils.AllureUtils;
 import utils.PropertyReader;
 
 public class TestNGListeners implements IInvokedMethodListener, ITestListener, IExecutionListener {
@@ -33,9 +34,10 @@ public class TestNGListeners implements IInvokedMethodListener, ITestListener, I
     }
 
     public void onExecutionStart() {
-        
+
         System.out.println("Execution started");
         PropertyReader.loadProperties();
+        AllureUtils.cleanAllureResults();
     }
 
     public void onExecutionFinish() {

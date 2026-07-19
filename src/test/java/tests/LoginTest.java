@@ -1,6 +1,8 @@
 package tests;
 
 import drivers.WebDriverFactory;
+import io.qameta.allure.*;
+import io.qameta.allure.testng.Tag;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -26,7 +28,14 @@ public class LoginTest {
 */
     //fluent pattern approach
     @Test
+    @Description("Verify that the user is redirected to home page after providing the right credentials")
+    @Tag("validation")
+    @Owner("Merna")
+    @Severity(SeverityLevel.CRITICAL)
     public void validLoginTest() {
+        Allure.getLifecycle().updateTestCase(testResult -> {
+            testResult.setName("Valid Login");
+        });
         //anonymous object
         new LoginPage(driver).
                 login(getProperty("validUsername"), getProperty("validPassword"))
